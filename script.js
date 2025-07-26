@@ -15,6 +15,8 @@ let currentGradientIndex = 0;
 // DOM elements
 const changeColorBtn = document.getElementById('changeColorBtn');
 const showTimeBtn = document.getElementById('showTimeBtn');
+const updateTextBtn = document.getElementById('updateTextBtn');
+const textInput = document.getElementById('textInput');
 const timeDisplay = document.getElementById('timeDisplay');
 const body = document.body;
 const title = document.querySelector('.title');
@@ -29,6 +31,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners
     changeColorBtn.addEventListener('click', changeBackgroundColor);
     showTimeBtn.addEventListener('click', toggleTimeDisplay);
+    updateTextBtn.addEventListener('click', updateTitleText);
+    
+    // Add Enter key support for text input
+    textInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            updateTitleText();
+        }
+    });
     
     // Add keyboard shortcuts
     document.addEventListener('keydown', function(e) {
@@ -36,6 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
             changeBackgroundColor();
         } else if (e.key === 't' || e.key === 'T') {
             toggleTimeDisplay();
+        } else if (e.key === 'u' || e.key === 'U') {
+            textInput.focus();
         }
     });
 });
@@ -53,6 +65,45 @@ function changeBackgroundColor() {
     
     // Show a brief message
     showTemporaryMessage('🎨 Color changed!');
+}
+
+// Update title text function
+function updateTitleText() {
+    const newText = textInput.value.trim();
+    
+    if (newText === '') {
+        showTemporaryMessage('⚠️ Please enter some text!');
+        textInput.focus();
+        return;
+    }
+    
+    // Add animation effect when changing text
+    title.style.animation = 'none';
+    title.style.transform = 'scale(0.8)';
+    title.style.opacity = '0.5';
+    title.style.transition = 'all 0.3s ease';
+    
+    setTimeout(() => {
+        title.textContent = newText;
+        title.style.transform = 'scale(1)';
+        title.style.opacity = '1';
+        
+        setTimeout(() => {
+            title.style.animation = 'pulse 2s ease-in-out infinite alternate';
+        }, 300);
+    }, 150);
+    
+    // Clear the input field
+    textInput.value = '';
+    
+    // Add button feedback
+    updateTextBtn.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        updateTextBtn.style.transform = 'scale(1)';
+    }, 150);
+    
+    // Show success message
+    showTemporaryMessage('✨ Text updated!');
 }
 
 // Toggle time display function
@@ -179,4 +230,11 @@ title.addEventListener('click', function() {
         
         clickCount = 0;
     }
+});
+
+// Auto-focus input field when page loads
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        textInput.focus();
+    }, 1500);
 });

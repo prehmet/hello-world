@@ -1,11 +1,13 @@
-# Hello, World Web App 🌍
+# Custom Text Web App 🌍
 
-A beautiful, interactive "Hello, World" web application with modern design and fun features!
+A beautiful, interactive web application where you can display your own custom text with modern design and fun features!
 
 ## Features ✨
 
+- **Custom Text Display**: Enter any text you want to display as the main title
 - **Beautiful Design**: Modern gradient backgrounds with glass-morphism effects
 - **Interactive Elements**: 
+  - Custom text input with smooth animations
   - Change background colors with the "Change Color" button
   - Display current time and date with the "Show Time" button
 - **Animations**: Smooth transitions, floating decorative elements, and pulsing title
@@ -13,6 +15,9 @@ A beautiful, interactive "Hello, World" web application with modern design and f
 - **Keyboard Shortcuts**: 
   - Press `C` to change colors
   - Press `T` to toggle time display
+  - Press `U` to focus on the text input
+  - Press `Enter` in the input field to update text
+- **Auto-Focus**: Input field automatically focuses when page loads
 - **Easter Egg**: Click the title 5 times for a surprise! 🎉
 
 ## How to Run 🚀
